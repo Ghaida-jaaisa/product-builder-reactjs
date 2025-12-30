@@ -4,22 +4,16 @@ import Image from "./Image";
 import Button from "./ui/Button";
 
 interface IProps {
-  proudct: IProduct
+  proudct: IProduct;
 }
 
-export const ProductCard = ({proudct} : IProps) => {
-  const {title, description, imageURL} = proudct
+export const ProductCard = ({ proudct }: IProps) => {
+  const { title, description, imageURL, price, category } = proudct;
   return (
-    <div className="border border-slate-300 rounded-md p-2 flex flex-col">
-      <Image
-        imageURL={imageURL}
-        alt={"Product Name"}
-        className="rounded-md"
-      />
+    <div className="border border-slate-300 rounded-md p-2 flex flex-col max-w-sm md:max-w-lg">
+      <Image imageURL={imageURL} alt={"Product Name"} className="rounded-md" />
       <h3>{title}</h3>
-      <p>
-       {txtSlicer(description)}
-      </p>
+      <p>{txtSlicer(description)}</p>
       <div className="flex items-center my-4 space-x-2">
         <span className="w-5 h-5 bg-red-600 rounded-full cursor-pointer"></span>
         <span className="w-5 h-5 bg-indigo-600 rounded-full cursor-pointer"></span>
@@ -27,10 +21,10 @@ export const ProductCard = ({proudct} : IProps) => {
       </div>
 
       <div className="flex items-center justify-between">
-        <span>$500</span>
+        <span>${price}</span>
         <img
-          src="./vite.svg"
-          alt=""
+          src={category.imageURL}
+          alt={category.name}
           className="w-5 h-5 rounded-full object-center"
         />
       </div>

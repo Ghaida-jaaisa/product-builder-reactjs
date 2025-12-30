@@ -1,4 +1,5 @@
 import type { IProduct } from "../interfaces";
+import { txtSlicer } from "../utils/functions";
 import Image from "./Image";
 import Button from "./ui/Button";
 
@@ -9,7 +10,7 @@ interface IProps {
 export const ProductCard = ({proudct} : IProps) => {
   const {title, description, imageURL} = proudct
   return (
-    <div className="border rounded-md p-2 flex flex-col">
+    <div className="border border-slate-300 rounded-md p-2 flex flex-col">
       <Image
         imageURL={imageURL}
         alt={"Product Name"}
@@ -17,7 +18,7 @@ export const ProductCard = ({proudct} : IProps) => {
       />
       <h3>{title}</h3>
       <p>
-       {description}
+       {txtSlicer(description)}
       </p>
       <div className="flex items-center my-4 space-x-2">
         <span className="w-5 h-5 bg-red-600 rounded-full cursor-pointer"></span>
@@ -35,11 +36,8 @@ export const ProductCard = ({proudct} : IProps) => {
       </div>
 
       <div className="flex items-center justify-between space-x-2 mt-5">
-        <Button className="bg-indigo-700">Delete</Button>
-        <Button className="bg-red-700">Delete</Button>
-        <Button className="bg-slate-900">Loading</Button>
-        <Button className="bg-green-700">Success</Button>
-        <Button className="bg-gray-300 p-2">Cancel</Button>
+        <Button className="bg-indigo-700">Edit</Button>
+        <Button className="bg-red-700 p-2">Delete</Button>
       </div>
     </div>
   );

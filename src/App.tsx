@@ -2,11 +2,12 @@ import { ProductCard } from "./components/ProductCard";
 import Modal from "./components/ui/Modal";
 import Button from "./components/ui/Button";
 import Input from "./components/ui/Input";
-import { formInputsList, productList } from "./data";
+import { colors, formInputsList, productList } from "./data";
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { type IProduct } from "./interfaces";
 import { productValidation } from "./validation";
 import ErrorMessage from "./components/ui/ErrorMessage";
+import CircleColor from "./components/ui/CircleColor";
 
 function App() {
   const defaultProductObj = {
@@ -20,7 +21,7 @@ function App() {
       imageURL: "",
     },
   };
-  //  State
+  //  ---------------------------------------- State ----------------------------------------
   const [product, setProduct] = useState<IProduct>(defaultProductObj);
   const [isOpen, setIsOpen] = useState(false);
   const [errors, setErrors] = useState({
@@ -29,8 +30,8 @@ function App() {
     imageURL: "",
     price: "",
   });
-
-  // Handler
+  const [tempColors, setTempColors] = useState<string[]>([]);
+  // ---------------------------------------- Handler ----------------------------------------
   function open() {
     setIsOpen(true);
   }
@@ -62,20 +63,21 @@ function App() {
     });
 
     const hasErrorMsg =
-      Object.values(errors).some(value => value === "") && Object.values(errors).every(value => value === "");
+      Object.values(errors).some((value) => value === "") &&
+      Object.values(errors).every((value) => value === "");
 
     if (!hasErrorMsg) {
       setErrors(errors);
       return;
     }
-  }
+  };
 
   function onCancel() {
     setProduct(defaultProductObj);
     close();
   }
 
-  //  Renders
+  // ---------------------------------------- Renders ----------------------------------------
   const renderProductList = productList.map((product) => (
     <ProductCard key={product.id} proudct={product} />
   ));
@@ -97,6 +99,14 @@ function App() {
       <ErrorMessage msg={errors[input.name]} />
     </div>
   ));
+
+  const renderProductColors = colors.map((color) => (
+    <CircleColor
+      onClick={() => setTempColors([color])}
+      key={color}
+      color={color}
+    />
+  ));
   return (
     <>
       <main className="container mx-auto px-4">
@@ -109,6 +119,9 @@ function App() {
         <Modal title="Add New Product" isOpen={isOpen} closeModal={close}>
           <form className="space-y-3" onSubmit={submitHandler}>
             {renderFormInput}
+            <div className="flex items-center my-4 space-x-1 flex-wrap ">
+              {renderProductColors}
+            </div>
             <div className="flex items-center space-x-3 ">
               <Button className="bg-indigo-700 hover:bg-indigo-800">
                 Submit

@@ -25,16 +25,19 @@ function App() {
   ));
 
   const renderFormInput = formInputsList.map((input) => (
-    <div
-      className="flex flex-col"
-    >
-      <label htmlFor={input.id}>{input.label}</label>
-      <Input id={input.id} name={input.name}/>
+    <div className="flex flex-col">
+      <label
+        htmlFor={input.id}
+        className="mb-[2n px] text-sm font-medium text-gray-700"
+      >
+        {input.label}
+      </label>
+      <Input id={input.id} name={input.name} />
     </div>
   ));
   return (
     <>
-      <main className="container mx-auto">
+      <main className="container mx-auto px-4">
         <Button className="bg-indigo-700 hover:bg-indigo-800" onClick={open}>
           Add
         </Button>
@@ -42,13 +45,15 @@ function App() {
           {renderProductList}
         </div>
         <Modal title="Add New Product" isOpen={isOpen} closeModal={close}>
-          {renderFormInput}
-          <div className="flex items-center space-x-3 ">
-            <Button className="bg-indigo-700 hover:bg-indigo-800">
-              Submit
-            </Button>
-            <Button className="bg-gray-300 hover:bg-gray-800">Cancel</Button>
-          </div>
+          <form className="space-y-3">
+            {renderFormInput}
+            <div className="flex items-center space-x-3 ">
+              <Button className="bg-indigo-700 hover:bg-indigo-800">
+                Submit
+              </Button>
+              <Button className="bg-gray-300 hover:bg-gray-800">Cancel</Button>
+            </div>
+          </form>
         </Modal>
       </main>
     </>

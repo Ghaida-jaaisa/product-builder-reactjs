@@ -11,7 +11,7 @@ export const ProductCard = ({ proudct }: IProps) => {
   const { title, description, imageURL, price, category } = proudct;
   return (
     <div className="border border-slate-300 rounded-md p-2 flex flex-col max-w-sm md:max-w-lg">
-      <Image imageURL={imageURL} alt={"Product Name"} className="rounded-md" />
+      <Image imageURL={imageURL} alt={"Product Name"} className="rounded-md aspect-4/3 w-full overflow-hidden" />
       <h3>{title}</h3>
       <p>{txtSlicer(description)}</p>
       <div className="flex items-center my-4 space-x-2">

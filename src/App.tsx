@@ -102,7 +102,13 @@ function App() {
 
   const renderProductColors = colors.map((color) => (
     <CircleColor
-      onClick={() => setTempColors([color])}
+      onClick={() => {
+        if (tempColors.includes(color)) {
+          setTempColors((prev) => prev.filter((item) => item !== color));
+          return;
+        }
+        setTempColors((prev) => [...prev, color]);
+      }}
       key={color}
       color={color}
     />
@@ -121,6 +127,18 @@ function App() {
             {renderFormInput}
             <div className="flex items-center my-4 space-x-1 flex-wrap ">
               {renderProductColors}
+            </div>
+
+            <div className="flex items-center my-4 space-x-1 flex-wrap ">
+              {tempColors.map((color) => (
+                <span
+                  className="p-1 mr-1 mb-1 text-xs rounded-md text-white"
+                  key={color}
+                  style={{ backgroundColor: color }}
+                >
+                  {color}
+                </span>
+              ))}
             </div>
             <div className="flex items-center space-x-3 ">
               <Button className="bg-indigo-700 hover:bg-indigo-800">

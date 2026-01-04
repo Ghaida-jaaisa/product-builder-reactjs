@@ -11,13 +11,6 @@ interface IProps {
 export default function Modal({ isOpen, closeModal, title, children }: IProps) {
   return (
     <div>
-      <Button
-        onClick={open}
-        className="rounded-md bg-black/50 px-4 py-2 text-sm font-medium text-white focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-black/30"
-      >
-        Open dialog
-      </Button>
-
       <Dialog
         open={isOpen}
         as="div"

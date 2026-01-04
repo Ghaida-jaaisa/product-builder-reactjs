@@ -8,6 +8,7 @@ import { type IProduct } from "./interfaces";
 import { productValidation } from "./validation";
 import ErrorMessage from "./components/ui/ErrorMessage";
 import CircleColor from "./components/ui/CircleColor";
+import { v4 as uuid } from "uuid";
 
 function App() {
   const defaultProductObj = {
@@ -23,6 +24,7 @@ function App() {
   };
   //  ---------------------------------------- State ----------------------------------------
   const [product, setProduct] = useState<IProduct>(defaultProductObj);
+  const [products, setProducts] = useState<IProduct[]>(productList);
   const [isOpen, setIsOpen] = useState(false);
   const [errors, setErrors] = useState({
     title: "",
@@ -70,6 +72,15 @@ function App() {
       setErrors(errors);
       return;
     }
+
+    setProducts((prev) => [
+      { ...product, id: uuid(), colors: tempColors },
+      ...prev,
+    ]);
+    // Clearing
+    setProduct(defaultProductObj);
+    setTempColors([]);
+    close();
   };
 
   function onCancel() {
@@ -78,7 +89,7 @@ function App() {
   }
 
   // ---------------------------------------- Renders ----------------------------------------
-  const renderProductList = productList.map((product) => (
+  const renderProductList = products.map((product) => (
     <ProductCard key={product.id} proudct={product} />
   ));
 

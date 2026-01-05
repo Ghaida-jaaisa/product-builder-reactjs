@@ -65,7 +65,7 @@ function App() {
     setIsOpenConfirmModal(false);
   }
   function openEditModal() {
-    setIsOpenEditModal(false);
+    setIsOpenEditModal(true);
   }
   function onChangeHandler(event: ChangeEvent<HTMLInputElement>) {
     const { value, name } = event.target;
@@ -303,7 +303,7 @@ function App() {
         </Modal>
         {/* Edit Product Modal */}
         <Modal
-          title="Edit thi Product"
+          title="Edit this Product"
           isOpen={isOpenEditModal}
           closeModal={closeEditModal}
         >

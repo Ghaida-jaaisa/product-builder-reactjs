@@ -8,6 +8,7 @@ interface IProps {
   proudct: IProduct;
   setProductToEdit: (product: IProduct) => void;
   openEditModal: () => void;
+  openConfirmModal: () => void;
   setProductToEditIdx: (value: number) => void;
   idx: number;
 }
@@ -16,6 +17,7 @@ export const ProductCard = ({
   proudct,
   setProductToEdit,
   openEditModal,
+  openConfirmModal,
   idx,
   setProductToEditIdx,
 }: IProps) => {
@@ -30,6 +32,12 @@ export const ProductCard = ({
     setProductToEditIdx(idx);
     setProductToEdit(proudct);
     openEditModal();
+  }
+
+  function handleOnRemove() {
+    setProductToEditIdx(idx);
+    setProductToEdit(proudct);
+    openConfirmModal();
   }
 
   return (
@@ -59,7 +67,9 @@ export const ProductCard = ({
         <Button className="bg-indigo-700 cursor-pointer" onClick={handleOnEdit}>
           Edit
         </Button>
-        <Button className="bg-red-700 p-2">Delete</Button>
+        <Button className="bg-red-700 p-2" onClick={handleOnRemove}>
+          Delete
+        </Button>
       </div>
     </div>
   );

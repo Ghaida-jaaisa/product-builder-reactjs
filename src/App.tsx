@@ -276,8 +276,8 @@ function App() {
             {renderFormEditInput}
 
             <Select
-              selected={selectedCategory}
-              setSelected={setSelectedCategory}
+              selected={productToEdit.category}
+              setSelected={(value) => setProductToEdit({...productToEdit, category : value})}
             />
             <div className="flex items-center my-4 space-x-1 flex-wrap ">
               {renderProductColors}

@@ -134,7 +134,10 @@ function App() {
     }
 
     const updatedProducts = [...products];
-    updatedProducts[productToEditIdx] = productToEdit;
+    updatedProducts[productToEditIdx] = {
+      ...productToEdit,
+      colors: tempColors.concat(productToEdit.colors),
+    };
     setProducts(updatedProducts);
     // Clearing
     setProductToEdit(defaultProductObj);
@@ -203,6 +206,10 @@ function App() {
     <CircleColor
       onClick={() => {
         if (tempColors.includes(color)) {
+          setTempColors((prev) => prev.filter((item) => item !== color));
+          return;
+        }
+        if (productToEdit.colors.includes(color)) {
           setTempColors((prev) => prev.filter((item) => item !== color));
           return;
         }
@@ -277,7 +284,7 @@ function App() {
             </div>
 
             <div className="flex items-center my-4 space-x-1 flex-wrap ">
-              {tempColors.map((color) => (
+              {tempColors.concat(productToEdit.colors).map((color) => (
                 <span
                   className="p-1 mr-1 mb-1 text-xs rounded-md text-white"
                   key={color}

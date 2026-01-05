@@ -18,7 +18,7 @@ export default function Modal({ isOpen, closeModal, title, children }: IProps) {
         onClose={closeModal}
         
       >
-        <div className="fixed inset-0 z-10 w-screen overflow-y-auto ">
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto backdrop-blur-xs">
           <div className="flex min-h-full items-center justify-center p-4">
             <DialogPanel
               transition

@@ -8,12 +8,16 @@ interface IProps {
   proudct: IProduct;
   setProductToEdit: (product: IProduct) => void;
   openEditModal: () => void;
+  setProductToEditIdx: (value: number) => void;
+  idx: number;
 }
 
 export const ProductCard = ({
   proudct,
   setProductToEdit,
   openEditModal,
+  idx,
+  setProductToEditIdx,
 }: IProps) => {
   const { title, description, imageURL, price, colors, category } = proudct;
   // ----------------------- Render ---------------------------
@@ -23,6 +27,7 @@ export const ProductCard = ({
 
   // ----------------------- Handler ---------------------------
   function handleOnEdit() {
+    setProductToEditIdx(idx);
     setProductToEdit(proudct);
     openEditModal();
   }

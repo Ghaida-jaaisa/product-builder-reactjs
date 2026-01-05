@@ -38,8 +38,10 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [productToEdit, setProductToEdit] =
     useState<IProduct>(defaultProductObj);
+  const [productToEditIdx, setProductToEditIdx] = useState<number>(0);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
 
+  console.log(productToEditIdx);
   // ---------------------------------------- Handler ----------------------------------------
   function open() {
     setIsOpen(true);
@@ -113,7 +115,7 @@ function App() {
   };
   const submitEditHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const { title, description, price, imageURL } = product;
+    const { title, description, price, imageURL } = productToEdit;
 
     const errors = productValidation({
       title,
@@ -131,19 +133,13 @@ function App() {
       return;
     }
 
-    setProducts((prev) => [
-      {
-        ...product,
-        id: uuid(),
-        colors: tempColors,
-        category: selectedCategory,
-      },
-      ...prev,
-    ]);
+    const updatedProducts = [...products];
+    updatedProducts[productToEditIdx] = productToEdit;
+    setProducts(updatedProducts);
     // Clearing
-    setProduct(defaultProductObj);
+    setProductToEdit(defaultProductObj);
     setTempColors([]);
-    close();
+    closeEditModal();
   };
 
   function onCancel() {
@@ -152,15 +148,17 @@ function App() {
   }
 
   function onCancelEditModal() {
-    setProduct(defaultProductObj);
+    setProductToEdit(defaultProductObj);
     closeEditModal();
   }
 
   // ---------------------------------------- Renders ----------------------------------------
-  const renderProductList = products.map((product) => (
+  const renderProductList = products.map((product, idx) => (
     <ProductCard
       key={product.id}
       proudct={product}
+      idx={idx}
+      setProductToEditIdx={setProductToEditIdx}
       setProductToEdit={setProductToEdit}
       openEditModal={openEditModal}
     />
